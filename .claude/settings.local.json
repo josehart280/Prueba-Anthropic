@@ -1,0 +1,42 @@
+{
+  "permissions": {
+    "allow": [
+      "mcp__playwright",
+      "Bash(cd D:/claude_proyecto && npm run setup)",
+      "Bash(cd D:/claude_proyecto && unzip -o uigen.zip -d .)",
+      "Bash(cd D:/claude_proyecto && npm run dev)",
+      "Bash(cd D:/claude_proyecto && set \"NODE_OPTIONS=--require ./node-compat.cjs\" && npx next dev --turbopack)",
+      "Bash(taskkill /F /IM node.exe)",
+      "Bash(taskkill //F //IM node.exe)",
+      "Bash(cd \"D:\\\\claude_proyecto\" && npm test -- src/lib/__tests__/auth.test.ts --run 2>&1)",
+      "Bash(cd D:/claude_proyecto && npm audit)",
+      "Bash(cd D:/claude_proyecto && npm audit fix --force)",
+      "Bash(cd D:/claude_proyecto && npm run test)",
+      "Bash(cd D:/claude_proyecto && npm install @ai-sdk/react)",
+      "Bash(cd D:/claude_proyecto && npm install @ai-sdk/react --legacy-peer-deps)",
+      "Bash(cd D:/claude_proyecto && npm run test -- --run src/hooks/__tests__/use-auth.test.ts)",
+      "mcp__playwright__browser_navigate",
+      "Bash(npm run:*)",
+      "mcp__playwright__browser_console_messages",
+      "Bash(npm install:*)",
+      "Bash(explorer http://localhost:3000)",
+      "Bash(cd D:/claude_proyecto && curl -s -X POST http://localhost:3000/api/chat -H \"Content-Type: application/json\" -d '{\"messages\":[{\"role\":\"user\",\"content\":\"create a counter component\"}],\"files\":{}}' --max-time 5 2>&1 | head -20)",
+      "Bash(sleep 3 && curl -s -X POST http://localhost:3000/api/chat -H \"Content-Type: application/json\" -d '{\"messages\":[{\"role\":\"user\",\"content\":\"create a counter\"}],\"files\":{}}' --max-time 30 2>&1 | head -50)",
+      "Bash(curl -v -X POST http://localhost:3000/api/chat -H \"Content-Type: application/json\" -d '{\"messages\":[{\"role\":\"user\",\"content\":\"hola\"}],\"files\":{}}' 2>&1 | head -50)",
+      "Bash(curl -s http://localhost:3000 2>&1 | head -20)",
+      "Bash(curl -s -X POST http://localhost:3000/api/chat -H \"Content-Type: application/json\" -d '{\"messages\":[{\"role\":\"user\",\"content\":\"hola\"}],\"files\":{}}' 2>&1)",
+      "Bash(netstat -ano | grep 3000 | head -5)",
+      "Bash(taskkill /F /PID 11540 2>&1 || echo \"Process killed\")",
+      "Bash(taskkill //F //PID 11540 2>&1)",
+      "Bash(sleep 8 && curl -s -X POST http://localhost:3000/api/chat -H \"Content-Type: application/json\" -d '{\"messages\":[{\"role\":\"user\",\"content\":\"hola\"}],\"files\":{}}' 2>&1)",
+      "Bash(netstat -ano | grep 3000 | head -1)",
+      "Bash(curl -s -X POST http://localhost:3000/api/chat -H \"Content-Type: application/json\" -d '{\"messages\":[{\"role\":\"user\",\"content\":\"create a counter component\"}],\"files\":{}}' 2>&1 | head -20)",
+      "Bash(sleep 10 && curl -s -X POST http://localhost:3000/api/chat -H \"Content-Type: application/json\" -d '{\"messages\":[{\"role\":\"user\",\"content\":\"create a counter\"}],\"files\":{}}' 2>&1 | head -30)",
+      "Bash(curl -s http://localhost:3000 2>&1 | head -5)",
+      "Bash(netstat -ano | grep 3000)",
+      "Bash(curl -s -X POST http://localhost:3000/api/chat -H \"Content-Type: application/json\" -d '{\"messages\":[{\"role\":\"user\",\"content\":\"test\"}],\"files\":{}}' 2>&1)",
+      "Bash(curl -s http://localhost:3000/api/test-env 2>&1 | head -10)",
+      "Bash(taskkill //F //PID 1788 2>&1; sleep 2)"
+    ]
+  }
+}

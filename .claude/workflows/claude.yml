@@ -1,0 +1,78 @@
+name: Claude Code
+
+on:
+  issue_comment:
+    types: [created]
+  pull_request_review_comment:
+    types: [created]
+  issues:
+    types: [opened, assigned]
+  pull_request_review:
+    types: [submitted]
+
+jobs:
+  claude:
+    if: |
+      (github.event_name == 'issue_comment' && contains(github.event.comment.body, '@claude')) ||
+      (github.event_name == 'pull_request_review_comment' && contains(github.event.comment.body, '@claude')) ||
+      (github.event_name == 'pull_request_review' && contains(github.event.review.body, '@claude')) ||
+      (github.event_name == 'issues' && (contains(github.event.issue.body, '@claude') || contains(github.event.issue.title, '@claude')))
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      pull-requests: write
+      issues: write
+      id-token: write
+      actions: read # Required for Claude to read CI results on PRs
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v6
+        with:
+          fetch-depth: 1
+
+
+      - name: Proyect Setup
+        run: |
+          npm install
+          npm run dev:daemon
+
+      - name: Run Claude Code
+        id: claude
+        uses: anthropics/claude-code-action@v1
+        with:
+          anthropic_api_key: ${{ secrets.ANTHROPIC_API_KEY }}
+
+
+          custom_instructions: |
+            Eres un asistente de desarrollo experto en Next.js, React, TypeScript, Prisma y Tailwind CSS.
+
+            Tu objetivo es ayudar al usuario a construir, modificar y mantener una aplicación web completa.
+
+            Normas de desarrollo:
+            1. Siempre que crees o modifiques archivos, asegúrate de que el proyecto sea funcional. Si necesitas crear archivos adicionales para que el código funcione (ej. componentes, estilos, etc.), créalos también.
+            2. Antes de realizar cambios importantes, ejecuta `npm run build` para verificar que no haya errores de compilación.
+            3. Si el usuario solicita una nueva funcionalidad, primero analiza el código existente y luego implementa la funcionalidad de manera que se integre correctamente con la arquitectura actual.
+            4. Para cambios en la base de datos, genera las migraciones necesarias y ejecuta `npx prisma migrate dev` para aplicarlas.
+            5. Mantén el código limpio, modular y siguiendo las mejores prácticas de React y Next.js.
+            6. Si no estás seguro de cómo implementar algo, pregunta al usuario para obtener más detalles.
+
+          # Optional: Customize the trigger phrase (default: @claude)
+          # trigger_phrase: "/claude"
+
+          # Optional: Trigger when specific user is assigned to an issue
+          # assignee_trigger: "claude-bot"
+
+          # Optional: Configure Claude's behavior with CLI arguments
+          # claude_args: |
+          #   --model claude-opus-4-1-20250805
+          #   --max-turns 10
+          #   --allowedTools "Bash(npm install),Bash(npm run build),Bash(npm run test:*),Bash(npm run lint:*)"
+          #   --system-prompt "Follow our coding standards. Ensure all new code has tests. Use TypeScript for new files."
+
+          # Optional: Advanced settings configuration
+          # settings: |
+          #   {
+          #     "env": {
+          #       "NODE_ENV": "test"
+          #     }
+          #   }
