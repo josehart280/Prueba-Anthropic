@@ -1,5 +1,8 @@
 # UIGen
 
+Proyecto echo con claude code Para futuro desarrollo
+
+
 AI-powered React component generator with live preview.
 
 ## Prerequisites
